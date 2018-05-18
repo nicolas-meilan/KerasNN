@@ -6,13 +6,13 @@ def createNeuralNetwork(trainingData, architecture, output=1):
     inp = Input((architecture[0],))
     x = Dense(architecture[1])(inp)
     for i in range(2, len(architecture) - output):
-        x = Dense(architecture[i])(x)
+        x = Dense(architecture[i], activation='relu')(x)
     outputNeurons = []
     for i in range(output, 0, -1):
-        outputNeurons.append(Dense(architecture[-i])(x))
+        outputNeurons.append(Dense(architecture[-i], activation='sigmoid')(x))
     model = Model(inp, outputNeurons)
-    model.compile(optimizer='sgd', loss='categorical_crossentropy')
-    model.fit(trainingData['input'], trainingData['output'], epochs=1000, batch_size=10, verbose=False)
+    model.compile(optimizer='sgd', metrics=['accuracy'], loss='categorical_crossentropy')
+    model.fit(trainingData['input'], trainingData['output'], epochs=10000, batch_size=100, verbose=False)
     return model
 
 def testNeuralNetwork(testData, neuralNetwork):

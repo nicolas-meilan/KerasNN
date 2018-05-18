@@ -26,6 +26,5 @@ architecture = [8, 16, 8, 4]
 trainingData = _formater(_readJson(trainingDataPath)['trainingData'])
 testData = _formater(_readJson(testDataPath)['testData'])
 neuralNetwork = createNeuralNetwork(trainingData, architecture)
-input = np.array([0,0,0,0,1,1,0,0], ndmin=2)
 print(testNeuralNetwork(testData, neuralNetwork))
 
