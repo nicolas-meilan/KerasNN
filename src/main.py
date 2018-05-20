@@ -18,13 +18,22 @@ def _formater(arrayData):
         output.append(data['output'])
     formatedData = {
         'input': np.array(input, ndmin=2),
-        'output': np.array(output, ndmin=2),
+        'output': np.array(output, ndmin=2)
     }
     return formatedData
 
-architecture = [8, 16, 8, 4]
+# architecture = [8, 16, 8, 4]
+# trainingData = _formater(_readJson(trainingDataPath)['trainingData'])
+# testData = _formater(_readJson(testDataPath)['testData'])
+# neuralNetwork = createNeuralNetwork(trainingData, architecture)
+# print(testNeuralNetwork(testData, neuralNetwork))
+
+architectureOneOutputs = [8, 16, 8, 4]
+architectureManyOutputs = [8, 16, 8, 4, 4, 4, 4, 4]
 trainingData = _formater(_readJson(trainingDataPath)['trainingData'])
 testData = _formater(_readJson(testDataPath)['testData'])
-neuralNetwork = createNeuralNetwork(trainingData, architecture)
-print(testNeuralNetwork(testData, neuralNetwork))
+# neuralNetwork = createNeuralNetwork(trainingData['input'], trainingData['output'], architectureOneOutputs)
+# print(testNeuralNetwork(testData['input'], [testData['output']], neuralNetwork))
+neuralNetwork = createNeuralNetwork(trainingData['input'], [trainingData['output'], trainingData['output'], trainingData['output'], trainingData['output'], trainingData['output']], architectureManyOutputs , 5)
+print(testNeuralNetwork(testData['input'], [testData['output'], testData['output'], testData['output'], testData['output'], testData['output']], neuralNetwork, 5))
 
